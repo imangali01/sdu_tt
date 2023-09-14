@@ -1,0 +1,6 @@
+.env
+.env.prod
+.idea/*
+__pycache__/
+venv/*
+postgres/data/*

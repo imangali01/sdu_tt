@@ -1,0 +1,20 @@
+version: "3"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sdu_tt
+    container_name: sdu_tt
+    command: bash -c "gunicorn src.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000"
+    environment:
+      - PROD=true
+    env_file:
+      - .env.prod
+    ports:
+      - 8000:8000
+    volumes:
+      - ./src:/sdu_tt/src:z
+      - ./static:/sdu_tt/static:z
+      - ./requirements.txt:/sdu_tt/requirements.txt:z
+    restart: always

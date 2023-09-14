@@ -1,0 +1,20 @@
+version: "3"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sdu_tt
+    container_name: sdu_tt
+    command: bash -c "uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload"
+    environment:
+      - PROD=false
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
+    volumes:
+      - ./src:/sdu_tt/src
+      - ./static:/sdu_tt/static
+      - ./requirements.txt:/sdu_tt/requirements.txt
+    restart: always
